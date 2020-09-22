@@ -8,7 +8,7 @@ import numpy as np
 from PIL import Image
 from nltk.stem import PorterStemmer, SnowballStemmer
 from nltk import WordNetLemmatizer
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 
 text_file = open('sample.txt')
 
@@ -147,15 +147,42 @@ clean_words = [word for word in words_without_punct if word not in stopwords]
 
 # # Bag of words
 # # Process : Raw text -> Clean text -> Tokenize -> Building Vocab -> Generate Vocab
-sentences = ["Jim and Pam travelled by the bus","The train was late",
-            "The flight was full. Travelling by flight is expensive"]
-cv = CountVectorizer()
+# sentences = ["Jim and Pam travelled by the bus","The train was late",
+#             "The flight was full. Travelling by flight is expensive"]
+# cv = CountVectorizer()
 # # Generating output for Bag Of Words
-B_O_W = cv.fit_transform(sentences).toarray()
-# Words with their index in the sentence
-print(cv.vocabulary_)
-print("\n")
-# The words
-print(cv.get_feature_names())
-print("\n")
-print(B_O_W)
+# B_O_W = cv.fit_transform(sentences).toarray()
+# # Words with their index in the model
+# print(cv.vocabulary_)
+# print("\n")
+# # The words
+# print(cv.get_feature_names())
+# print("\n")
+# print(B_O_W)
+
+# # TF-IDF values 
+
+# # TF - Term Frequency
+# # TF = Frequency of words in a sentence / Total number of words in the sentence
+# # IDF - Inverse Document Frequency  
+# # IDF = Total number of sentences / Number of sentences containing that word
+# # Calculating TF-IDF value = TF * IDF
+# # Smoothening the values by taking log in IDF
+# # IDF = log(Total number of sentences / Number of sentences containing that word)
+
+# # The actual calculations are:- 
+# # IDF = log(Total number of sentences + 1 / Number of sentences containing that word + 1)
+# # TF-IDF = (TF)*(IDF+1)
+
+# sentences = ["This is the first document", "This document is the second document"]
+# vectorizer = TfidfVectorizer(norm=None)
+# X = vectorizer.fit_transform(sentences).toarray()
+# print(vectorizer.vocabulary_)
+# print("\n")
+# print(vectorizer.get_feature_names())
+# print("\n")
+# print(X)
+
+# # Cosine Similarity
+# # Cosine Similarity (d1, d2) =  Dot product(d1, d2) / ||d1|| * ||d2||
+# # Where d1, d2 are two non-zero vectors
