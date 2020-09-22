@@ -9,6 +9,7 @@ from PIL import Image
 from nltk.stem import PorterStemmer, SnowballStemmer
 from nltk import WordNetLemmatizer
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 text_file = open('sample.txt')
 
@@ -174,9 +175,9 @@ clean_words = [word for word in words_without_punct if word not in stopwords]
 # # IDF = log(Total number of sentences + 1 / Number of sentences containing that word + 1)
 # # TF-IDF = (TF)*(IDF+1)
 
-# sentences = ["This is the first document", "This document is the second document"]
-# vectorizer = TfidfVectorizer(norm=None)
-# X = vectorizer.fit_transform(sentences).toarray()
+sentences = ["This is the first document", "This document is the second document"]
+vectorizer = TfidfVectorizer(norm=None)
+X = vectorizer.fit_transform(sentences)#.toarray()
 # print(vectorizer.vocabulary_)
 # print("\n")
 # print(vectorizer.get_feature_names())
@@ -186,3 +187,4 @@ clean_words = [word for word in words_without_punct if word not in stopwords]
 # # Cosine Similarity
 # # Cosine Similarity (d1, d2) =  Dot product(d1, d2) / ||d1|| * ||d2||
 # # Where d1, d2 are two non-zero vectors
+print(cosine_similarity(X[0:1],X))
