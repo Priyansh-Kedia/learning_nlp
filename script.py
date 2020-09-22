@@ -8,6 +8,7 @@ import numpy as np
 from PIL import Image
 from nltk.stem import PorterStemmer, SnowballStemmer
 from nltk import WordNetLemmatizer
+from sklearn.feature_extraction.text import CountVectorizer
 
 text_file = open('sample.txt')
 
@@ -144,3 +145,17 @@ clean_words = [word for word in words_without_punct if word not in stopwords]
 # word2 = wordnet.synsets('boat','n')[0]
 # print(word1.wup_similarity(word2))
 
+# # Bag of words
+# # Process : Raw text -> Clean text -> Tokenize -> Building Vocab -> Generate Vocab
+sentences = ["Jim and Pam travelled by the bus","The train was late",
+            "The flight was full. Travelling by flight is expensive"]
+cv = CountVectorizer()
+# # Generating output for Bag Of Words
+B_O_W = cv.fit_transform(sentences).toarray()
+# Words with their index in the sentence
+print(cv.vocabulary_)
+print("\n")
+# The words
+print(cv.get_feature_names())
+print("\n")
+print(B_O_W)
